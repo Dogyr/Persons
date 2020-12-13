@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persons.Common.Dtos;
+using Persons.Common.Filters;
 using Persons.Common.Interfaces;
+using Persons.Common.Validators;
 using Persons.DataLayer;
 using Persons.DataLayer.Entities;
 using Persons.DataLayer.Repositories;
@@ -38,6 +41,17 @@ namespace Persons
             var mappingConfig = new MapperConfiguration(UseMapperConfiguration);
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            services
+               .AddMvc(options =>
+               {
+                   options.Filters.Add(new ValidationFilter());
+               })
+               .AddFluentValidation(options =>
+               {
+                   options.ImplicitlyValidateChildProperties = true;
+                   options.RegisterValidatorsFromAssemblyContaining<PersonValidator>();
+               });
         }
 
         protected void UseMapperConfiguration(IMapperConfigurationExpression mapperConfiguration)
