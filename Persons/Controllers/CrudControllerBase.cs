@@ -4,7 +4,7 @@ using Persons.Common.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Persons.Common
+namespace Persons.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

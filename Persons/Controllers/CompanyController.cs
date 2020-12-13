@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Persons.Common;
 using Persons.Common.Dtos;
 using Persons.Common.Interfaces;
 

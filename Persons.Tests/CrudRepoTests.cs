@@ -19,17 +19,17 @@ namespace Persons.Tests
             { 
                 Name = "Tom",
                 Surname = "Cruise",
-                Phone = "88005553535"
+                Phone = "88005553535",
+                CompanyId = 1
             };
             DbContext.Persons.AddAsync(entityPerson);
             DbContext.SaveChangesAsync();
-
 
             _repository = new BaseRepository<Person, PersonDto>(Mapper, DbContext);
         }
 
         [Fact]
-        public async Task TestGetIsSucces()
+        public async Task TestGetIsSuccess()
         {
             var result = await _repository.GetAsync();
 
@@ -37,7 +37,7 @@ namespace Persons.Tests
         }
 
         [Fact]
-        public async Task TestFindByIdIsSucces()
+        public async Task TestFindByIdIsSuccess()
         {
             var entityPerson = Fixture.Build<Person>()
                 .Without(x => x.Id)
@@ -62,7 +62,7 @@ namespace Persons.Tests
         }
 
         [Fact]
-        public async Task TestCreateIsSucces()
+        public async Task TestCreateIsSuccess()
         {
             var dto= Fixture.Build<PersonDto>()
                 .Without(x => x.Id)
@@ -109,6 +109,7 @@ namespace Persons.Tests
         public async Task TestUpdateTestIsExc()
         {
             var item = Fixture.Create<PersonDto>();
+            item.Id = 1000;
 
             var result = await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() => _repository.UpdateAsync(item));
 
