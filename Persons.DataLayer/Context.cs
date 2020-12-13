@@ -5,11 +5,11 @@ namespace Persons.DataLayer
 {
     public class Context : DbContext
     {
-        DbSet<Company> Companies { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
-        DbSet<Person> Persons { get; set; }
+        public DbSet<Person> Persons { get; set; }
 
-        DbSet<Passport> Passports { get; set; }
+        public DbSet<Passport> Passports { get; set; }
 
         public Context(DbContextOptions<Context> options)
             : base(options)
