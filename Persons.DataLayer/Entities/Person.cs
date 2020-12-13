@@ -1,20 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Persons.DataLayer.Entities
 {
     [Table(nameof(Person))]
-    public class Person
+    public class Person : BaseEntity
     {
-        public int Id { get; set; }
-
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(100)]
         public string Surname { get; set; }
 
+        [MaxLength(12)]
         public string Phone { get; set; }
 
-        public Passport Passport { get; set; }
-
+        [Required]
         public int CompanyId { get; set; }
 
         [ForeignKey(nameof(CompanyId))]

@@ -9,8 +9,15 @@ namespace Persons.DataLayer
 
         DbSet<Person> Persons { get; set; }
 
+        DbSet<Passport> Passports { get; set; }
+
         public Context(DbContextOptions<Context> options)
             : base(options)
         { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
